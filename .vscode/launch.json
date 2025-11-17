@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "GitHub_908786e9"
+        },
+        {
+            "type": "java",
+            "name": "ReplaceLetters",
+            "request": "launch",
+            "mainClass": "ReplaceLetters",
+            "projectName": "GitHub_908786e9"
+        },
+        {
+            "type": "java",
+            "name": "MoveFirstLetterToEnd",
+            "request": "launch",
+            "mainClass": "MoveFirstLetterToEnd",
+            "projectName": "GitHub_908786e9"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "LabS.Main",
+            "projectName": "GitHub_908786e9"
+        }
+    ]
+}
