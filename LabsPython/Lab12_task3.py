@@ -1,37 +1,45 @@
 import tkinter as tk
 
-def calc(op):
-    a = float(entry1.get())
-    b = float(entry2.get())
-    
-    if op == "+":
-        result = a + b
-    elif op == "-":
-        result = a - b
-    elif op == "*":
-        result = a * b
-    elif op == "/":
-        result = "Помилка" if b == 0 else a / b
-    
-    label_result.config(text="Результат: " + str(result))
+def click(event):
+    text = event.widget.cget("text")
+    if text == "=":
+        try:
+            result = eval(entry.get())
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, result)
+        except Exception:
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, "Помилка")
+    elif text == "C":
+        entry.delete(0, tk.END)
+    else:
+        entry.insert(tk.END, text)
 
-window = tk.Tk()
-window.title("Калькулятор")
+#ГОЛОВНЕ ВІКНО
+root = tk.Tk()
+root.title("Калькулятор")
+root.geometry("300x400")
 
-tk.Label(window, text="Перше число:").grid(row=0, column=0)
-entry1 = tk.Entry(window)
-entry1.grid(row=0, column=1)
+#ПОЛЕ ВВЕДЕННЯ
+entry = tk.Entry(root, font=("Arial", 20), borderwidth=5, justify="right")
+entry.pack(fill="x", padx=10, pady=10, ipady=8)
 
-tk.Label(window, text="Друге число:").grid(row=1, column=0)
-entry2 = tk.Entry(window)
-entry2.grid(row=1, column=1)
+#КНОПКИ
+buttons = [
+    ['7', '8', '9', '/'],
+    ['4', '5', '6', '*'],
+    ['1', '2', '3', '-'],
+    ['0', '.', 'C', '+'],
+    ['=']
+]
 
-tk.Button(window, text="+", command=lambda: calc("+")).grid(row=2, column=0)
-tk.Button(window, text="-", command=lambda: calc("-")).grid(row=2, column=1)
-tk.Button(window, text="*", command=lambda: calc("*")).grid(row=3, column=0)
-tk.Button(window, text="/", command=lambda: calc("/")).grid(row=3, column=1)
+for row in buttons:
+    frame = tk.Frame(root)
+    frame.pack(expand=True, fill="both")
+    for btn_text in row:
+        btn = tk.Button(frame, text=btn_text, font=("Arial", 18), height=2, width=5)
+        btn.pack(side="left", expand=True, fill="both")
+        btn.bind("<Button-1>", click)
 
-label_result = tk.Label(window, text="")
-label_result.grid(row=4, column=0, columnspan=2)
-
-window.mainloop()
+#ЗАПУСК
+root.mainloop()
